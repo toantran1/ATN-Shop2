@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-----------------------------Header---------------------------------->
+    <head>
+      <%- include('partials/header-home') -%>
+    </head>
+
+    <!-----------------------------Body---------------------------------->
+  </head>
+<body>
+  <!-------------------------Menu------------------------------------>
+  <%- include('partials/menu') -%>
+
+  <div class="row">
+    <%- include('partials/row-left') -%>
+
+    
+    <div class="main">
+      <h2>Register Forms</h2>
+        <form action="/register" action="sessions" method="POST"> <!--van chua-->
+          <table>
+            
+            <tr>
+              <td><label for="username">User:</label></td>
+              <td><input type="text" id="username" name="username" value="abc"></td>
+            </tr>
+
+            <tr>
+              <td><label for="password">Password:</label></td>
+              <td><input type="text" id="password" name="password" value="123"></td>
+            </tr>
+
+
+            <!-- <tr>
+              <td><label for="permission">Choose type permission:</label></td>
+              <td> 
+                <select id="permission" name="permission">
+                <option  value="manager">Manager</option>
+                <option  value="staff">Staff</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><label for="Fullname">Fullname:</label></td>
+              <td><input type="text" id="Fullname" name="Fullname" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="DateOfBirth">DateOfBirth:</label></td>
+              <td><input type="text" id="DateOfBirth" name="DateOfBirth" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="Address">Address:</label></td>
+              <td><input type="text" id="Address" name="Address" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="sex">Sex</label> </td>
+              <td> 
+                <select id="sex" name="sex">
+                <option name="sex" value="Nam">Nam</option>
+                <option name="sex" value="Nu">Nu</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><label for="Phone">Phone:</label></td>
+              <td><input type="text" id="Phone" name="Phone" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="Email">Email:</label></td>
+              <td><input type="text" id="Email" name="Email" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="CN_id">CN_id:</label></td>
+              <td><input type="text" id="CN_id" name="CN_id" value="123"></td>
+            </tr> -->
+
+          </table>
+          <br>
+          <input type="submit" value="Submit">
+        </form>  
+        
+        
+    </div>
+
+  </div>
+
+    <!------------------------------------Footer----------------------------------------->
+    <footer>
+      <%- include('partials/footer') -%>
+    </footer>
+
+</body>
+</html>
+

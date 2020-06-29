@@ -60,17 +60,6 @@ app.get("/product", function(req,res)
     res.render("product");
 });
 
-app.get("/haha",function(req,res){
-    MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db(NameDataBase);
-        dbo.collection(NameTable).findOne({}, function(err, result) {
-          if (err) throw err;
-          console.log(result.name);
-          db.close();
-        });
-      });
-});
 
 app.post('/register', function (req, res) {
     var body = req.body;
@@ -91,7 +80,7 @@ app.post('/register', function (req, res) {
         Email:"9",
         CN_id: "10"
     };
-    dbo.collection(NameTable).insertOne(mydata)
+    dbo.collection(NameTable).insertOne(body)
         .then (result => {
             console.log(result);
             client.close();

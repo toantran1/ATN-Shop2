@@ -1,40 +1,45 @@
-/// <AdminATN>  <pzcIA9LJBdMVxuE3>  <ATN-Shop>
-/// db("ATN-Shop")
-///	collection("Account")
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://AdminATN:pzcIA9LJBdMVxuE3@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
+var MongoClient = require('mongodb').MongoClient;
+const url = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
 
 
-// dieu khien truy 
-// <, <=, >, >=, !=
-// $lt, $lte, $gt, $gte, $ne
-var query = {
-  Product_name : /.*u.*/,
-  Price :{$gte: 5000}
-};
-//{Price :{$gte: 6000}};
-//Price : {$gte :300000}
+/// ***************** ***************** *****************
+/// ***************** Database & Bảng dữ liệu cần Truy vấn
+const NameDataBase = "ATN-Shop";
+const NameTable = "Account";
 
-/// Thay ở đây !!!
-MongoClient.connect(
-	uri, 
-	{ useNewUrlParser: true , useUnifiedTopology: true }
-	)
-.then (client => {
 
-  var dbo = client.db("ATN-Shop");
+/// --------------------Find-------------------------
+// MongoClient.connect(url, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//   dbo.collection(NameTable).find({}).toArray()
+// 	.then (result => {
+// 		console.log(result);
+// 		client.close();
+// 	})
+// 	.catch(error => console.error(error));
+// })
+// .catch(error => console.error(error));
 
-var newProduct = {
-  Product_name :;
-  Discription: ;
-  Price : ;
-}
-
-// ***innsert
-//   dbo.collection("Products").insertOne(newProduct)
-// 	.then (results => {
-// 		console.log(results);
+// /// --------------------Insert-------------------------
+// MongoClient.connect(url, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//   var mydata = {
+//     User: "1",
+//     Password: "2",
+//     Permission: "3",
+//     Fullname: "4",
+//     DateOfBirth: "5",
+//     Address: "6",
+//     Sex: "7",
+//     Phone: "8",
+//     Email:"9",
+//     CN_id: "10"
+//   };
+//   dbo.collection(NameTable).insertOne(mydata)
+// 	.then (result => {
+// 		console.log(result);
 // 		client.close();
 // 	})
 // 	.catch(error => console.error(error));
@@ -43,22 +48,4 @@ var newProduct = {
 
 
 
-  // **** Find
-  dbo.collection("Products").findOne
-	.then (results => {
-		console.log(results);
-		client.close();
-	})
-	.catch(error => console.error(error));
-})
-.catch(error => console.error(error));
 
-//AdminATN
-//c5cRPWjtDGDCzOsR
-//Account
-//ATN-Shop
-
-
-
-// npm install ejs body-parser mongoose cors express-session --save 
-// npm install nodemon --save -dev

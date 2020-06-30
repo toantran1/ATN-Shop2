@@ -1,6 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 const url = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
 
+ObjectId = require('mongodb').ObjectID;
 
 /// ***************** ***************** *****************
 /// ***************** Database & Bảng dữ liệu cần Truy vấn
@@ -9,6 +10,14 @@ const NameTable = "Account";
 
 var username = "admin";
 var password = "123456";
+
+        // console.log("Name " + result[0].Product_name);
+        // console.log("Discription " + result[0].Discription);
+        // console.log("Price " + result[0].Price);
+        // console.log("Img "  + result[0].Product_image);
+        // console.log("Inventory " + result[0].Inventory);
+        // console.log("Revenue " + result[0].Revenue);
+
 
 
 // /// --------------------Find-------------------------
@@ -60,28 +69,80 @@ var password = "123456";
 
 
 
-/// --------------------Query-------------------------
+// /// --------------------Query(login)-------------------------
+// MongoClient.connect(url, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//     var query = {
+//         User: "admin",
+//         Password:"123456"
+// };
+
+//   dbo.collection(NameTable).find(query).toArray()
+// 	.then (result => {
+//         //console.log(result);
+//         console.log(result.length)
+//         console.log("--------------");
+//         for(var i= 0; i < result.length; i++)
+//         {
+
+//         console.log(result[i].User);
+//         console.log(result[i].Password);
+//         }
+// 		client.close();
+// 	})
+// 	.catch(error => console.error(error));
+// })
+// .catch(error => console.error(error));
+
+// //Id(demo)= 5ef00bcfbbb0ff3ffb2be1b3
+// /// --------------------Query(FindID)-------------------------
+// MongoClient.connect(url, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//   var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
+//     var query = {
+//       _id : ObjectId(id) // se thay doi o day
+// };
+
+//   dbo.collection("Products").find(query).toArray()
+// 	.then (result => {
+//         console.log(result);
+//         console.log(result.length)
+//         console.log("--------------");
+
+//         // for(var i= 0; i < result.length; i++)
+//         // {
+//         var i = 0;
+//         console.log("Name " + result[i].Product_name);
+//         console.log("Discription " + result[i].Discription);
+//         console.log("Price " + result[i].Price);
+//         console.log("Img "  + result[i].Product_image);
+//         console.log("Inventory " + result[i].Inventory);
+//         console.log("Revenue " + result[i].Revenue);
+//         //}
+// 		client.close();
+// 	})
+// 	.catch(error => console.error(error));
+// })
+// .catch(error => console.error(error));
+
+
+
+/// --------------------Query(FindID)-------------------------
 MongoClient.connect(url, { useUnifiedTopology: true })
 .then (client => {
   var dbo = client.db(NameDataBase);
-    var query = {
-        User: "admin",
-        Password:"123456"
-};
+  var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
+      var query = {
+      _id : ObjectId(id)
+  };
 
-  dbo.collection(NameTable).find(query).toArray()
-	.then (result => {
-        //console.log(result);
-        console.log(result.length)
-        console.log("--------------");
-        for(var i= 0; i < result.length; i++)
-        {
-
-        console.log(result[i].User);
-        console.log(result[i].Password);
-        }
-		client.close();
-	})
-	.catch(error => console.error(error));
+  dbo.collection("Products").find(query).toArray()
+      .then (result => {
+          //ahha
+          client.close();
+      })
+      .catch(error => console.error(error));
 })
-.catch(error => console.error(error));
+.catch(error => console.error(error)); 

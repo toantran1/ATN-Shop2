@@ -3,6 +3,7 @@ const app = express();
 const port = 8001;
 var url = require('url');						
 var path = require('path');
+ObjectId = require('mongodb').ObjectID;
 
 
 var bodyParser = require('body-parser');
@@ -12,6 +13,10 @@ app.use(bodyParser.json());
 
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+/// *****************  Models
+const Product = require('./models/product-data');
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencode
@@ -45,23 +50,15 @@ app.get("/", function(reg,res){
 
 app.get("/login",function(req,res)
 {
-    if ((req.query.username == "abc") && (req.query.password == "123"))
-    {
-        res.redirect('/');
-    }
-    else
-    {
-        res.render("login");
-    } 
+    res.render("login");
 });
 
 app.get("/product", function(req,res)
 {
-    res.render("product");
+    responseDB(res, "product",
+				Product, {}, {}, "productlist");
+    //res.render("product");
 });
-
-
-
 
 app.get("/account", function(req,res)
 {
@@ -78,6 +75,61 @@ app.get("/register",function(req,res)
 {
     res.render("register");
 });
+
+/// /payment
+/// ***************** ***************** *****************
+app.get('/payment', viewPayment);
+function viewPayment(request, response) {
+       //response.send("Web - PAYMENT page !" + request.query.dssp);
+       var dssp = request.query.dssp;
+       var listkq = dssp.split("_");
+   
+       listsp = [];
+       var count = listkq.length/2; 
+
+       if (listkq.length % 2 != 0 )
+        count = ((listkq.length - 1) /2);
+
+       for (i=0; i< count; i++) {
+           listsp.push(
+               { Name :listkq[i*2], Price : 30000, Num: listkq[i*2+1]},
+           );
+
+       }
+
+       for (j=0; j< count; j++){
+        payment(listsp[j].Name);
+       }
+       
+    //    console.log(listsp[0].Name);
+    //    console.log(listsp[0].Num);
+
+       response.render("payment", {productlist : listsp });
+}
+
+function payment(_id){
+    /// --------------------Query(FindID)-------------------------
+    MongoClient.connect(uri, { useUnifiedTopology: true })
+    .then (client => {
+    var dbo = client.db(NameDataBase);
+    var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
+        var query = {
+        _id : ObjectId(_id)
+    };
+
+    dbo.collection("Products").find(query).toArray()
+        .then (result => {
+            //ahha
+            console.log(result);
+            client.close();
+        })
+        .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error)); 
+}
+
+
+
 
 /// ***************** ***************** *****************
 /// ***************** POST
@@ -121,16 +173,6 @@ app.post('/login', function(req, res){
 
     dbo.collection(NameTable).find(query).toArray()
         .then (result => {
-            //console.log(result);
-            // console.log(result.length)
-            // console.log("--------------");
-            // for(var i= 0; i < result.length; i++)
-            // {
-
-            // console.log(result[i].User);
-            // console.log(result[i].Password);
-            // }
-
             if(result.length == 1)
             {
                 console.log("ban da dang nhap thanh cong");
@@ -143,6 +185,63 @@ app.post('/login', function(req, res){
 
     res.redirect('/');
 });
+
+
+/// ***************** 
+async function responseDB(response, xview, xModel, xQuery, xparams, xtag, xNext="error") {
+
+    const xdb = await mongosee.connect(
+        uri, 
+        { useNewUrlParser: true , useUnifiedTopology: true }
+    );
+    
+    if (xdb) 
+    {
+        //xQuery = { Password : "" , _id : ""};
+        const kq = await xModel.find(xQuery).exec();
+
+        if (kq) {
+            xparams[xtag] = kq;            
+            console.log(xview + "\t THanh cong !");
+            response.render(xview, xparams);
+        } else {
+            response.render(xNext, { mesg : "... KO co Data DB ! "} );
+        }
+    } else {
+        response.send("ko thanh cong !");
+        //response.redirect('/login');
+    }
+
+}
+
+var xflag = 0;
+var vResult = [];
+
+/// ***************** ***************** *****************
+async function runQuery(NameTable , vQuery) {
+	
+	const xdbo = await MongoClient.connect(
+		uri, 
+		{ useNewUrlParser: true , useUnifiedTopology: true }
+    );    
+	const dbo = xdbo.db(NameDataBase);
+	////// Run - Query
+	const results = await dbo.collection(NameTable).find(vQuery).toArray();
+
+    ///
+    vResult = results;
+    console.log(results);
+    xflag = 1;
+
+	return results;
+}
+
+/// *****************
+async function readDB() {
+    const inf = await runQuery( "Products" , {} );
+    vResult = inf;
+    xflag = 1;
+}
 
 app.set('views', path.join(__dirname, './views'));
 app.listen(port, () => console.log("Example app listening at http://localhost:${port}"));

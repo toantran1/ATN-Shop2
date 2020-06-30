@@ -2,7 +2,7 @@
 <html lang="en">
 <!-----------------------------Header---------------------------------->
 <head>
-  <%- include('partials/header-home') -%>
+  <%- include('partials/header') -%>
 </head>
 
 <!-----------------------------Body---------------------------------->
@@ -11,10 +11,30 @@
   <%- include('partials/menu') -%>
 
   <div class="row">
-    <%- include('partials/row-left') -%>
+    <%- include('partials/row-left-products') -%>
 
     <div class="main">
-      <h2>Order</h2>
+      <h2>Product</h2>
+      
+      <% for (var i = 0; i < productlist.length; i++) { %>
+        <div>
+          <tr style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
+            <td>
+              <img width="150px" height="200px" src="<%= productlist[i].Product_image%>">
+            </td>
+            <td > 
+              <H3><%= productlist[i].Product_name %></H3>
+              <p><b>Price: </b>
+                              <%= productlist[i].Price%> </p>
+              
+              <p><b>Information: </b></p>                                
+              <p><%= productlist[i].Discription%> </p>
+              <button type="button" class="" onclick="themvao('<%= productlist[i]._id %>', '<%= productlist[i].Product_name %>', '<%= productlist[i].Price%>' )">Thêm vào</button>
+            </td>
+          </tr>
+                  <% } %>
+        </div>
+      
     </div>
     
   </div>

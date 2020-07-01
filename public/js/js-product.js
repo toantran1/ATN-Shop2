@@ -5,9 +5,8 @@ function addGioHang(xID, xName, xPrice) {
     var hangthem = giohang[xID];
 
     console.log(hangthem);
-
     if (hangthem) {
-        hangthem["soluong"] += 1
+        hangthem["soluong"] += 1;
     } else {
         hangthem = { "ten" : xName, "gia" : xPrice, "soluong" : 1};
     }
@@ -36,7 +35,7 @@ function themvao(xID, xName, xPrice) {
         showlist += "<tr> <td> " 
             + giohang[ xkeys[j] ]["ten"] 
             + " </td> <td> "  + giohang[ xkeys[j] ]["soluong"] + " </td> <td> "
-            + giohang[ xkeys[j] ]["gia"] + " </td></tr>";
+            + giohang[ xkeys[j] ]["gia"] * giohang[ xkeys[j] ]["soluong"] + " </td></tr>";
     };
 
 

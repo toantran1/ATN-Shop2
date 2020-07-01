@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 /// *****************  Models
 const Product = require('./models/product-data');
+const Account = require('./models/account-data');
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencode
@@ -62,7 +63,12 @@ app.get("/product", function(req,res)
 
 app.get("/account", function(req,res)
 {
-    res.render("account");
+    responseDB(res, "account",
+    Account, {}, {}, "accountlist");
+
+    
+    
+    //res.render("account");
 });
 
 
@@ -96,36 +102,21 @@ function viewPayment(request, response) {
            );
 
        }
+    
+        for (j=0; j< count; j++){
+            query = {
+                _id: ObjectId(listsp[j].Name)
+            };
 
-       for (j=0; j< count; j++){
-        payment(listsp[j].Name);
-       }
+            runQuery("Products",query);
+        }
+        
+    
+        response.render("payment", {productlist : arrBill });
        
-    //    console.log(listsp[0].Name);
-    //    console.log(listsp[0].Num);
+        
 
-       response.render("payment", {productlist : listsp });
-}
-
-function payment(_id){
-    /// --------------------Query(FindID)-------------------------
-    MongoClient.connect(uri, { useUnifiedTopology: true })
-    .then (client => {
-    var dbo = client.db(NameDataBase);
-    var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
-        var query = {
-        _id : ObjectId(_id)
-    };
-
-    dbo.collection("Products").find(query).toArray()
-        .then (result => {
-            //ahha
-            console.log(result);
-            client.close();
-        })
-        .catch(error => console.error(error));
-    })
-    .catch(error => console.error(error)); 
+       
 }
 
 
@@ -159,8 +150,6 @@ app.post('/register', function (req, res) {
 
 app.post('/login', function(req, res){
     var body = req.body;
-    //console.log(body.User);
-    //console.log(body.Password);
 
     /// --------------------Query-------------------------
     MongoClient.connect(uri, { useUnifiedTopology: true })
@@ -216,6 +205,7 @@ async function responseDB(response, xview, xModel, xQuery, xparams, xtag, xNext=
 
 var xflag = 0;
 var vResult = [];
+var arrBill = [];
 
 /// ***************** ***************** *****************
 async function runQuery(NameTable , vQuery) {
@@ -229,18 +219,28 @@ async function runQuery(NameTable , vQuery) {
 	const results = await dbo.collection(NameTable).find(vQuery).toArray();
 
     ///
-    vResult = results;
-    console.log(results);
-    xflag = 1;
+    arrBill.push(
+        {
+            _id : results[0]._id,
+            Name : results[0].Product_name,
+            Price : results[0].Price,
+            Num : 1,
+            Img : results[0].Product_image,
+        }
+    );
+    //arrBill.push(results);
+    console.log(arrBill);
+    //xflag = 1;
 
 	return results;
 }
 
 /// *****************
-async function readDB() {
-    const inf = await runQuery( "Products" , {} );
+async function readDB(dataTable, query) {
+    
+    const inf = await runQuery( dataTable , query );
     vResult = inf;
-    xflag = 1;
+    //xflag = 1;
 }
 
 app.set('views', path.join(__dirname, './views'));

@@ -3,6 +3,7 @@
 <!-----------------------------Header---------------------------------->
 <head>
   <%- include('partials/header') -%>
+  <title>Page Payment</title>
 </head>
 
 <!-----------------------------Body---------------------------------->
@@ -17,11 +18,11 @@
       <h2>Payment</h2>
       <div class="row">
         <table width = "100%">
-            
+
         <% for (var i = 0; i < productlist.length; i++) { %>
                 <tr style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
                     <td>
-                        <img width="50px" height="50px" src="<%= productlist[i].Product_image%>">
+                        <img width="50px" height="50px" src="<%= productlist[i].Img%>">
                     </td>
                     <td > 
                         <P><%= productlist[i].Name %></P>

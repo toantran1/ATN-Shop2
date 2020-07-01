@@ -1,10 +1,18 @@
 var MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
+const uri = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
+
+
+//const uri = "mongodb+srv://db03:aGBZRta11CBmt8qL@cluster0-q8a6f.mongodb.net/CloudDB?retryWrites=true&w=majority";
 
 ObjectId = require('mongodb').ObjectID;
 
+//const NameDataBase =  "atnshop"; // "CloudDB";
+
 /// ***************** ***************** *****************
 /// ***************** Database & Bảng dữ liệu cần Truy vấn
+// const NameDataBase = "ATN-Shop";
+// const NameTable = "Account";
+
 const NameDataBase = "ATN-Shop";
 const NameTable = "Account";
 
@@ -18,10 +26,39 @@ var password = "123456";
         // console.log("Inventory " + result[0].Inventory);
         // console.log("Revenue " + result[0].Revenue);
 
+var vResult = 0;
+var xflag = 0;
+
+
+/// ***************** ***************** *****************
+async function runQuery(NameTable , vQuery) {
+	
+	const xdbo = await MongoClient.connect(
+		uri, 
+		{ useNewUrlParser: true , useUnifiedTopology: true }
+    );    
+	const dbo = xdbo.db(NameDataBase);
+	////// Run - Query
+	const results = await dbo.collection(NameTable).find(vQuery).toArray();
+
+    ///
+    //vResult = results;
+    console.log(results);
+    //xflag = 1;
+
+	return results;
+}
+async function readDB() {
+    const inf = await runQuery( NameTable , {} );
+    vResult = inf;
+    xflag = 1;
+}
+
+readDB();
 
 
 // /// --------------------Find-------------------------
-// MongoClient.connect(url, { useUnifiedTopology: true })
+// MongoClient.connect(uri, { useUnifiedTopology: true })
 // .then (client => {
 //   var dbo = client.db(NameDataBase);
 //   dbo.collection(NameTable).find({}).toArray()
@@ -129,20 +166,20 @@ var password = "123456";
 
 
 
-/// --------------------Query(FindID)-------------------------
-MongoClient.connect(url, { useUnifiedTopology: true })
-.then (client => {
-  var dbo = client.db(NameDataBase);
-  var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
-      var query = {
-      _id : ObjectId(id)
-  };
+// /// --------------------Query(FindID)-------------------------
+// MongoClient.connect(url, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//   var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
+//       var query = {
+//       _id : ObjectId(id)
+//   };
 
-  dbo.collection("Products").find(query).toArray()
-      .then (result => {
-          //ahha
-          client.close();
-      })
-      .catch(error => console.error(error));
-})
-.catch(error => console.error(error)); 
+//   dbo.collection("Products").find(query).toArray()
+//       .then (result => {
+//           //ahha
+//           client.close();
+//       })
+//       .catch(error => console.error(error));
+// })
+// .catch(error => console.error(error)); 

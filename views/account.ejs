@@ -4,6 +4,7 @@
     <!-----------------------------Header---------------------------------->
     <head>
       <%- include('partials/header-home') -%>
+      <title>Page Account</title>
     </head>
 
     <!-----------------------------Body---------------------------------->
@@ -13,33 +14,85 @@
   <%- include('partials/menu') -%>
 
   <div class="row">
-    <%- include('partials/row-left') -%>
+    <%- include('partials/row-left-account') -%>
 
     
     <div class="main">
       <h2>Register Forms</h2>
-        <form action="##"> <!--van chua-->
+        <form action="/register" action="sessions" method="POST"> <!--van chua-->
           <table>
-            <tr>
-              <td><span>User:</span></td>
-              <td><span>1</span></td>
-            </tr>
-
-            <tr>
-              <td><span>Password:</span></td>
-              <td><<span>1</span>/td>
-            </tr>
-
-            <tr>
-              <td><label>Fullname</label></td>
-              <td><span>User:</span></td>
-            </tr>
-
             
+            <tr>
+              <td><label for="username">User:</label></td>
+              <td><input type="text" id="username" name="User" value="<%= accountlist[0].User %>"></td>
+            </tr>
+
+            <tr>
+              <td><label for="password">Password:</label></td>
+              <td><input type="text" id="password" name="Password" value="123"></td>
+            </tr>
+
+
+            <tr>
+              <td><label for="permission">Choose type permission:</label></td>
+              <td> 
+                <select id="permission" name="Permission">
+                <option  name="Permission" value="manager">Manager</option>
+                <option  name="Permission" value="staff">Staff</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><label for="Fullname">Fullname:</label></td>
+              <td><input type="text" id="Fullname" name="Fullname" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="DateOfBirth">DateOfBirth:</label></td>
+              <td><input type="text" id="DateOfBirth" name="DateOfBirth" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="Address">Address:</label></td>
+              <td><input type="text" id="Address" name="Address" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="sex">Sex</label> </td>
+              <td> 
+                <select id="sex" name="Sex">
+                <option name="Sex" value="Nam">Nam</option>
+                <option name="Sex" value="Nu">Nu</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td><label for="Phone">Phone:</label></td>
+              <td><input type="text" id="Phone" name="Phone" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="Email">Email:</label></td>
+              <td><input type="text" id="Email" name="Email" value="123"></td>
+            </tr>
+
+            <tr>
+              <td><label for="CN_id">CN_id:</label></td>
+              <td><input type="text" id="CN_id" name="CN_id" value="123"></td>
+            </tr>
+
           </table>
           <br>
           <input type="submit" value="Submit">
+          <input type="submit" value="Insert">
+          <input type="submit" value="Delete">
         </form>  
+        
+        
+    </div>
+
         
         
     </div>

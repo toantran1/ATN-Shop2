@@ -123,24 +123,29 @@ function viewPayment(request, response) {
         {
             for(var i = 0; i< count; i++)
             {
-                arrBill[0].Price *= listkq[i*2+1];
-                arrBill[0].Num = listkq[i*2+1];
+                arrBill[i].Price *= listkq[i*2+1];
+                arrBill[i].Num = listkq[i*2+1];
             }
             blockPayment = 2;
         }
 
     }
-    
-    
-
 
     response.render("payment", {productlist : arrBill });
-       
-        
-
-       
+           
 }
 
+app.get('/load', chuyentiep);
+function chuyentiep(req,res)
+{
+    var Url = req.query.url;
+    console.log("da cho 5 giay");
+    var load =[];
+    load.push(
+       {url: Url}
+    );
+    res.render("waitloadpage",{aa :load});
+}
 
 
 
@@ -184,9 +189,17 @@ app.post('/login', function(req, res){
 
     dbo.collection(NameTable).find(query).toArray()
         .then (result => {
+            console.log(result.length);
             if(result.length == 1)
             {
+               
                 console.log("ban da dang nhap thanh cong");
+                res.redirect('/');
+            }
+            else
+            {
+                console.log("ban da dang nhap that bai");
+                res.redirect('/login');
             }
             client.close();
         })
@@ -194,7 +207,7 @@ app.post('/login', function(req, res){
     })
     .catch(error => console.error(error));
 
-    res.redirect('/');
+    
 });
 
 

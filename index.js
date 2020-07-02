@@ -266,7 +266,7 @@ async function readDB(dataTable, query) {
 }
 
 app.set('views', path.join(__dirname, './views'));
-app.listen(port, () => console.log("Example app listening at http://localhost:${port}"));
+app.listen(process.env.PORT || port, () => console.log("Example app listening at http://localhost:${port}"));
 
 
 

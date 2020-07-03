@@ -48,13 +48,13 @@
   
   /* Change color on hover */
   .navbar a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color:green;
+    color: white;
   }
   
   /* Active/current link */
   .navbar a.active {
-    background-color: #666;
+    background-color: green;
     color: white;
   }
   

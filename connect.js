@@ -199,23 +199,10 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
       _id : ObjectId(id)
   };
 
-  var newvalues = { $set: {
-        User: body.User , 
-        Password: body.Password ,
-        Permission: body.Permission ,
-        Fullname: body.Fullname ,
-        DateOfBirth: body.DateOfBirth ,
-        Address: body.Address ,
-        Sex: body.Sex ,
-        Phone: body.Phone ,
-        Email: body.Email ,
-        CN_id: body.CN_id
-    } };
-
-  dbo.collection("Account").updateOne(query, newvalues)
+  dbo.collection("Account").deleteOne(query)
       .then (result => {
           //ahha
-          console.log(result);
+          console.log("deleted");
           client.close();
       })
       .catch(error => console.error(error));

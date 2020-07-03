@@ -149,6 +149,32 @@ function chuyentiep(req,res)
 }
 
 
+app.get('/account/delete', deleteAccount);
+function deleteAccount(req,res)
+{
+    var dssp = req.query.user;
+    MongoClient.connect(uri, { useUnifiedTopology: true })
+    .then (client => {
+    var dbo = client.db(NameDataBase);
+    var id = dssp;// se thay doi o day
+        var query = {
+        _id : ObjectId(id)
+    };
+
+    dbo.collection("Account").deleteOne(query)
+        .then (result => {
+            //ahha
+            console.log("deleted");
+            client.close();
+        })
+        .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error)); 
+
+    res.redirect('/account');
+}
+
+
 
 /// ***************** ***************** *****************
 /// ***************** POST

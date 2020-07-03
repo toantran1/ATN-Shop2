@@ -23,6 +23,10 @@
                         '<%= accountlist[i].Email %>',
                         '<%= accountlist[i].CN_id %>')" value="View">
                 </td>
+                <td>
+                    <!-- buton view -->
+                    <button onclick="location.href='/account/delete?user=<%= accountlist[i]._id %>'" type="button"  >Delete</button>
+                </td>
                 
             </tr>
             <% } %>

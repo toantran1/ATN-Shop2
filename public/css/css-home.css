@@ -10,10 +10,10 @@
   
   /* Header/logo Title */
   .header {
-    padding: 25px;
+    padding: 45px;
     text-align: center;
     background-image: url("../images/doraemon-anime-bluray-TECHRUM-cover8ca97e7a09c22208.jpg");
-    
+    color: white;
   }
   
   /* Increase the font size of the heading */

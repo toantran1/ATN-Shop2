@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /// *****************  Models
 const Product = require('./models/product-data');
 const Account = require('./models/account-data');
+const Bill = require('./models/bill-data');
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencode
@@ -28,6 +29,24 @@ app.use(express.static("public"));
 var xflag = 0;
 var vResult = [];
 var blockPayment = 0;
+var blockSale = 0;
+var saleslistget = [];
+    saleslistget.push(
+        {
+            M1: 0,
+            M2: 0,
+            M3: 0,
+            M4: 0,
+            M5: 0,
+            M6: 0,
+            M7: 0,
+            M8: 0,
+            M9: 0,
+            M10: 0,
+            M11: 0,
+            M12: 0
+        }
+    );
 
 /// ***************** ***************** *****************
 /// ***************** ***************** Config DB CONNECTION
@@ -48,6 +67,7 @@ const NameTable = "Account";
 /// ***************** ***************** *****************
 /// ***************** GET
 app.get("/", function(reg,res){
+    blockSale = 0;
     res.render("home");
 });
 
@@ -68,7 +88,7 @@ app.get("/product", function(req,res)
 app.get("/account", function(req,res)
 {
     responseDB(res, "account",
-    Account, {}, {}, "accountlist");
+    Bill, {}, {}, "accountlist");
 
     
     
@@ -78,7 +98,108 @@ app.get("/account", function(req,res)
 
 app.get("/sales", function(req,res)
 {
-    res.render("sales");
+
+    
+    //console.log(saleslistget[0].M1);
+
+    var price = 0;
+    if (blockSale == 0)
+    {
+        MongoClient.connect(uri, { useUnifiedTopology: true })
+        .then (client => {
+        var dbo = client.db(NameDataBase);
+        //saleslistget[0].M1 += result[i].Price_all;
+
+        dbo.collection("Bill").find({}).toArray()
+            .then (result => {
+                //ahha
+                //console.log(result);
+                for (var i = 0 ; i < result.length; i++)
+                {
+                    switch(result[i].Month) {
+                        case 1:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M1 += price;
+                        break;
+                        case 2:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M2 += price;;
+                        break;
+
+                        case 3:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M3 += price;;
+                        break;
+                        case 4:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M4 += price;;
+                        break;
+
+                        case 5:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M5 += price;;
+                        break;
+                        case 6:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M6 += price;;
+                        break;
+
+                        case 7:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M7 += price;;
+                        break;
+                        case 8:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M8 += price;;
+                        break;
+
+                        case 9:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M9 += price;;
+                        break;
+                        case 10:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M10 += price;;
+                        break;
+
+                        case 11:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M11 += price;;
+                        break;
+                        case 12:
+                        // code block
+                        price = Number(result[i].Price_all) ;
+                        saleslistget[0].M12 += price;;
+                        break;
+                        default:
+                        // code block
+                    }
+                    
+                }
+                console.log(saleslistget);
+                client.close();
+            })
+            .catch(error => console.error(error));
+        })
+        .catch(error => console.error(error)); 
+    }
+    
+
+    console.log(saleslistget[0].M5);
+
+    
+    res.render("sales", {tableList: saleslistget}); //sua o day
 });
 
 app.get("/register",function(req,res)

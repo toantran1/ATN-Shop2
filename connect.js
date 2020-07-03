@@ -122,23 +122,20 @@ const NameTable = "Account";
 
 
 
-// /// --------------------Query(FindID)-------------------------
-// MongoClient.connect(url, { useUnifiedTopology: true })
-// .then (client => {
-//   var dbo = client.db(NameDataBase);
-//   var id = "5ef00bcfbbb0ff3ffb2be1b3";// se thay doi o day
-//       var query = {
-//       _id : ObjectId(id)
-//   };
+/// --------------------Query(FindID)-------------------------
+MongoClient.connect(uri, { useUnifiedTopology: true })
+.then (client => {
+  var dbo = client.db(NameDataBase);
 
-//   dbo.collection("Products").find(query).toArray()
-//       .then (result => {
-//           //ahha
-//           client.close();
-//       })
-//       .catch(error => console.error(error));
-// })
-// .catch(error => console.error(error)); 
+  dbo.collection("Bill").find({}).toArray()
+      .then (result => {
+          //ahha
+          console.log(result);
+          client.close();
+      })
+      .catch(error => console.error(error));
+})
+.catch(error => console.error(error)); 
 
 
 /// --------------------Insert for Payment-------------------------
@@ -190,21 +187,21 @@ const NameTable = "Account";
 // });
 
 
-/// --------------------Query(FindID)-------------------------
-MongoClient.connect(uri, { useUnifiedTopology: true })
-.then (client => {
-  var dbo = client.db(NameDataBase);
-  var id = "5ef95015b98bdb447f4924f4";// se thay doi o day
-      var query = {
-      _id : ObjectId(id)
-  };
+// /// --------------------Query(FindID)-------------------------
+// MongoClient.connect(uri, { useUnifiedTopology: true })
+// .then (client => {
+//   var dbo = client.db(NameDataBase);
+//   var id = "5ef95015b98bdb447f4924f4";// se thay doi o day
+//       var query = {
+//       _id : ObjectId(id)
+//   };
 
-  dbo.collection("Account").deleteOne(query)
-      .then (result => {
-          //ahha
-          console.log("deleted");
-          client.close();
-      })
-      .catch(error => console.error(error));
-})
-.catch(error => console.error(error)); 
+//   dbo.collection("Account").deleteOne(query)
+//       .then (result => {
+//           //ahha
+//           console.log("deleted");
+//           client.close();
+//       })
+//       .catch(error => console.error(error));
+// })
+// .catch(error => console.error(error)); 

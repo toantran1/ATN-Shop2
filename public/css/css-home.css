@@ -236,6 +236,9 @@
       text-decoration: none; }
       #footer a:hover {
         color: #ce1b28; }
+        #footer h3 p:hover{
+          color: #ce1b28;
+        }
     #footer .content {
       display: -moz-flex;
       display: -webkit-flex;

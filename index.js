@@ -33,6 +33,7 @@ var blockPayment = 0;
 /// ***************** ***************** Config DB CONNECTION
 const MongoClient = require('mongodb').MongoClient;
 const mongosee = require('mongoose');
+const { ObjectID } = require('mongodb');
 
 
 const uri = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
@@ -177,6 +178,7 @@ app.post('/register', function (req, res) {
 
 app.post('/login', function(req, res){
     var body = req.body;
+    
 
     /// --------------------Query-------------------------
     MongoClient.connect(uri, { useUnifiedTopology: true })
@@ -209,6 +211,38 @@ app.post('/login', function(req, res){
 
     
 });
+
+app.post("/account/update", function (req, res) {
+    var body = res.body;
+    
+
+
+    MongoClient.connect(uri, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        var myquery = { _id: ObjectID(id) };
+        var newvalues = { $set: {
+            User: body.User , 
+            Password: body.Password ,
+            Permission: body.Permission ,
+            Fullname: body.Fullname ,
+            DateOfBirth: body.DateOfBirth ,
+            Address: body.Address ,
+            Sex: body.Sex ,
+            Phone: body.Phone ,
+            Email: body.Email ,
+            CN_id: body.CN_id
+        } };
+        dbo.collection("Account").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");
+          db.close();
+        });
+      });
+
+});
+
+
 
 
 /// ***************** 

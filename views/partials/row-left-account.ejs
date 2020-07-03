@@ -1,6 +1,32 @@
 <div class="side">
     <div class="col-sm-4">
       <h1>Account</h1>
+        <table>
+            <% for (var i = 0; i < accountlist.length; i++) { %>
+            <tr>
+                <td>
+                    <!-- ten nguoi dung-->
+                    <a> <%= accountlist[i].Fullname %></a>
+                </td>
+                <td>
+                    <!-- buton view -->
+                    <input type="button" onclick="view(
+                        '<%= accountlist[i]._id %>',
+                        '<%= accountlist[i].User %>',
+                        '<%= accountlist[i].Password %>',
+                        '<%= accountlist[i].Permission %>',
+                        '<%= accountlist[i].Fullname %>',
+                        '<%= accountlist[i].DateOfBirth %>',
+                        '<%= accountlist[i].Address %>',
+                        '<%= accountlist[i].Sex %>',
+                        '<%= accountlist[i].Phone %>',
+                        '<%= accountlist[i].Email %>',
+                        '<%= accountlist[i].CN_id %>')" value="View">
+                </td>
+                
+            </tr>
+            <% } %>
+        </table>
       <p>Trang này sẽ hiện thị danh sách thông tin accoung của người dùng</p>
       <p>Các tính năng cần cho Page Account</p>
       <p>Đối với Staff:</p>

@@ -5,6 +5,7 @@
     <head>
       <%- include('partials/header-home') -%>
       <title>Page Account</title>
+      <script src="js/js-account.js"></script>
     </head>
 
     <!-----------------------------Body---------------------------------->
@@ -19,7 +20,7 @@
     
     <div class="main">
       <h2>Register Forms</h2>
-        <form action="/register" action="sessions" method="POST"> <!--van chua-->
+        <form  method="POST" > <!--van chua-->
           <table>
             
             <tr>
@@ -29,17 +30,18 @@
 
             <tr>
               <td><label for="password">Password:</label></td>
-              <td><input type="text" id="password" name="Password" value="123"></td>
+              <td><input type="password" id="password" name="Password" value="123" ></td>
             </tr>
 
 
             <tr>
               <td><label for="permission">Choose type permission:</label></td>
               <td> 
-                <select id="permission" name="Permission">
+                <a id="permission"> </a>
+                <!-- <select id="permission" name="Permission">
                 <option  name="Permission" value="manager">Manager</option>
                 <option  name="Permission" value="staff">Staff</option>
-                </select>
+                </select> -->
               </td>
             </tr>
 
@@ -61,10 +63,11 @@
             <tr>
               <td><label for="sex">Sex</label> </td>
               <td> 
-                <select id="sex" name="Sex">
+                <a id="sex"></a>
+                <!-- <select id="sex" name="Sex">
                 <option name="Sex" value="Nam">Nam</option>
                 <option name="Sex" value="Nu">Nu</option>
-                </select>
+                </select> -->
               </td>
             </tr>
 
@@ -85,9 +88,7 @@
 
           </table>
           <br>
-          <input type="submit" value="Submit">
-          <input type="submit" value="Insert">
-          <input type="submit" value="Delete">
+          <input type="submit" value="Update">
         </form>  
         
         

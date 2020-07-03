@@ -278,6 +278,61 @@ async function readDB(dataTable, query) {
     //xflag = 1;
 }
 
+//****** Insert data*/
+app.get('/insert', insertdata);
+function insertdata(req,res)
+{
+     /// ***************** ***************** *****************
+  /// ***************** Database & Bảng dữ liệu cần Truy vấn
+
+
+  const NameDataBase = "ATN-Shop";
+  MongoClient.connect(uri, { useUnifiedTopology: true })
+  .then (client => {
+    var dbo = client.db(NameDataBase);
+
+    var ghepproduct = "";
+    var ghepNum = "";
+    var sumPrice = 0;
+
+    for (var i= 0; i<arrBill.length ; i++ )
+    {
+        ghepproduct += arrBill[i]._id + ", ";
+        ghepNum += arrBill[i].Num + ", ";
+        sumPrice += arrBill[i].Price;
+    }
+    
+
+    var today = new Date();
+
+    var day = today.getDate();
+    var month = today.getMonth();
+    var year = today.getFullYear();
+    
+
+    var mydata = {
+      Product_id: ghepproduct,
+      Num:ghepNum,
+      User_id:"5ef85267e23742be814567ad",
+      Price_all:sumPrice,
+      Day:day,
+      Month:month + 1,
+      Year:year
+    };
+    dbo.collection("Bill").insertOne(mydata)
+      .then (result => {
+          console.log(result);
+          client.close();
+      })
+      .catch(error => console.error(error));
+  })
+  .catch(error => console.error(error));
+
+  res.redirect("/");
+}
+
+
+
 app.set('views', path.join(__dirname, './views'));
 app.listen(process.env.PORT || port, () => console.log("Example app listening at http://localhost:${port}"));
 

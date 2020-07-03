@@ -2,7 +2,7 @@
 <html lang="en">
 <!-----------------------------Header---------------------------------->
 <head>
-  <%- include('partials/header') -%>
+  <%- include('partials/headertest') -%>
   <title>Page Payment</title>
 </head>
 
@@ -18,7 +18,7 @@
       <h2>Payment</h2>
       <div class="row">
         <table width = "100%">
-
+          <form action="/insert">
         <% for (var i = 0; i < productlist.length; i++) { %>
                 <tr style="border-width: 5px;border-color: rgb(33, 158, 81);padding-bottom: 15px;">
                     <td>
@@ -32,7 +32,8 @@
                 </tr>
         <% } %>
         </table>
-        <button type="button" onclick="alert('Da Thanh Toan')">Thanh Toan</button>
+        <button type="submit" >Thanh Toan</button>
+      </form>
         </div>
       
       

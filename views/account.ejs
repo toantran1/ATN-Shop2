@@ -20,9 +20,14 @@
     
     <div class="main">
       <h2>Register Forms</h2>
-        <form  method="POST" > <!--van chua-->
+        <form  method="POST" action="/account/update" > <!--van chua-->
           <table>
             
+            <tr>
+              <td><label for="id"></label></td>
+              <td><input type="text" id="id" name="Id" value="<%= accountlist[0]._id %>" hidden ></td>
+            </tr>
+
             <tr>
               <td><label for="username">User:</label></td>
               <td><input type="text" id="username" name="User" value="<%= accountlist[0].User %>"></td>
@@ -37,11 +42,11 @@
             <tr>
               <td><label for="permission">Choose type permission:</label></td>
               <td> 
-                <a id="permission"> </a>
-                <!-- <select id="permission" name="Permission">
+                <!-- <a id="permission"> </a> -->
+                <select id="permission" name="Permission">
                 <option  name="Permission" value="manager">Manager</option>
                 <option  name="Permission" value="staff">Staff</option>
-                </select> -->
+                </select>
               </td>
             </tr>
 
@@ -63,11 +68,11 @@
             <tr>
               <td><label for="sex">Sex</label> </td>
               <td> 
-                <a id="sex"></a>
-                <!-- <select id="sex" name="Sex">
+                <!-- <a id="sex"></a> -->
+                <select id="sex" name="Sex">
                 <option name="Sex" value="Nam">Nam</option>
                 <option name="Sex" value="Nu">Nu</option>
-                </select> -->
+                </select>
               </td>
             </tr>
 

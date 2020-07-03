@@ -3,6 +3,7 @@
 
 function view(id, user, pass, permis, name, birh, address, sex, phone, email, cnid)
 {
+    var idv = document.getElementById("id");
     var usernamev = document.getElementById("username");
     var passv = document.getElementById("password");
     var permisv = document.getElementById("permission");
@@ -15,6 +16,7 @@ function view(id, user, pass, permis, name, birh, address, sex, phone, email, cn
     var cnidv = document.getElementById("CN_id");
 
     
+    idv.value = id;
     usernamev.value = user;
     passv.value = pass;
     permisv.value = permis;

@@ -213,15 +213,20 @@ app.post('/login', function(req, res){
 });
 
 app.post("/account/update", function (req, res) {
-    var body = res.body;
+    var body = req.body;
     
+    // console.log(body.Permission);
 
+    MongoClient.connect(uri, { useUnifiedTopology: true })
+    .then (client => {
+    var dbo = client.db(NameDataBase);
+    var id = body.Id;// se thay doi o day
+    //console.log(id);
+        var query = {
+        _id : ObjectId(id)
+    };
 
-    MongoClient.connect(uri, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("mydb");
-        var myquery = { _id: ObjectID(id) };
-        var newvalues = { $set: {
+    var newvalues = { $set: {
             User: body.User , 
             Password: body.Password ,
             Permission: body.Permission ,
@@ -233,12 +238,18 @@ app.post("/account/update", function (req, res) {
             Email: body.Email ,
             CN_id: body.CN_id
         } };
-        dbo.collection("Account").updateOne(myquery, newvalues, function(err, res) {
-          if (err) throw err;
-          console.log("1 document updated");
-          db.close();
-        });
-      });
+
+    dbo.collection("Account").updateOne(query, newvalues)
+        .then (result => {
+            //ahha
+            //console.log(result);
+            client.close();
+        })
+        .catch(error => console.error(error));
+    })
+    .catch(error => console.error(error)); 
+
+    res.redirect('/account');
 
 });
 

@@ -73,6 +73,8 @@
     flex: 30%;
     background-color: #f1f1f1;
     padding: 20px;
+    float: left;
+    width: 30%;
   }
   
   /* Main column */
@@ -81,6 +83,8 @@
     flex: 70%;
     background-image: url("../images/anhdao.jpg");
     padding: 20px;
+    float: right;
+    width: 70%;
   }
   
   /* Fake image, just for this example */

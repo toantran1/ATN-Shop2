@@ -88,12 +88,16 @@
   }
   
   /* Fake image, just for this example */
+  .fakeimg1 {
+    background-image: url("../images/7.jpg");
+    width: 100%;
+    padding: 20px;
+  }
   .fakeimg {
     background-image: url("../images/7.jpg");
     width: 100%;
     padding: 20px;
   }
-  
   /* Footer
   .footer {
     padding: 20px;

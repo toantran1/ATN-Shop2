@@ -86,7 +86,9 @@
       background-image: url("../images/anhdao.jpg");
     padding: 20px;
   }
-  
+  .main h2{
+    color: red;
+  }
   /* Fake image, just for this example */
   .fakeimg1 {
     background-image: url("../images/7(1).jpg");

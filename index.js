@@ -88,7 +88,7 @@ app.get("/product", function(req,res)
 app.get("/account", function(req,res)
 {
     responseDB(res, "account",
-    Bill, {}, {}, "accountlist");
+    Account, {}, {}, "accountlist");
 
     
     

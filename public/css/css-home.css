@@ -108,6 +108,16 @@
     width: 100%;
     padding: 20px;
   }
+  .fakeimg5 {
+    background-image: url("../images/starwar1.jpg");
+    width: 100%;
+    padding: 20px;
+  }
+  .fakeimg6 {
+    background-image: url("../images/maxresdefault.jpg");
+    width: 100%;
+    padding: 20px;
+  }
   /* Footer
   .footer {
     padding: 20px;

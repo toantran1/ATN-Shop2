@@ -98,6 +98,16 @@
     width: 100%;
     padding: 20px;
   }
+  .fakeimg3 {
+    background-image: url("../images/doraemon-nobi-nobita-ultra-detail-figure-400-ookamiotoko-cream-ver-medicom-toy-22046.jpg");
+    width: 100%;
+    padding: 20px;
+  }
+  .fakeimg4 {
+    background-image: url("../images/s-l400.jpg");
+    width: 100%;
+    padding: 20px;
+  }
   /* Footer
   .footer {
     padding: 20px;

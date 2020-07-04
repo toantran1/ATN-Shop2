@@ -57,10 +57,11 @@
     background-color: green;
     color: white;
   }
-  .navbar a.active1 {
+  /* .navbar a.active1 {
     background-color: red;
     color: white;
-  }
+  } */
+  
   /* Column container */
   .row {  
     display: -ms-flexbox; /* IE10 */

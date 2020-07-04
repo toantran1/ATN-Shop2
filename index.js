@@ -55,7 +55,7 @@ const mongosee = require('mongoose');
 const { ObjectID } = require('mongodb');
 
 
-const uri = "mongodb+srv://AdminATN:123456ATN@cluster0-bqt2b.mongodb.net/ATN-Shop?retryWrites=true&w=majority";
+const uri = "mongodb+srv://toan:toan7112000@cluster0-zf49w.mongodb.net/ATN_shop?retryWrites=true&w=majority";
 
 
 /// ***************** ***************** *****************

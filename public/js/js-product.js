@@ -42,4 +42,9 @@ function themvao(xID, xName, xPrice) {
     x.innerHTML = showlist;
     ds.value = dsspmua;
 }
+
+function haha()
+{
+    alert("haha");
+}
     

@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://toan:toan7112000@cluster0-zf49w.mongodb.net/ATN_shop?retryWrites=true&w=majority";
+const uri = "mongodb+srv://toan:toangay@cluster0-zf49w.mongodb.net/ATN_shop?retryWrites=true&w=majority";
 
 ObjectId = require('mongodb').ObjectID;
 
@@ -8,9 +8,10 @@ ObjectId = require('mongodb').ObjectID;
 /// ***************** Database & Bảng dữ liệu cần Truy vấn
 
 
-const NameDataBase = "ATN-Shop";
-const NameTable = "Account";
+const NameDataBase = "ATN_shop";
+//const NameTable = "Account";
 
+///pass: toangay
 // /// --------------------Find-------------------------
 // MongoClient.connect(uri, { useUnifiedTopology: true })
 // .then (client => {
@@ -126,7 +127,7 @@ MongoClient.connect(uri, { useUnifiedTopology: true })
 .then (client => {
   var dbo = client.db(NameDataBase);
 
-  dbo.collection("Bill").find({}).toArray()
+  dbo.collection("Account").find({}).toArray()
       .then (result => {
           //ahha
           console.log(result);
